@@ -57,7 +57,7 @@ with open(filename2, 'r') as search:
 
 input = np.zeros((8,8))
 for i in range(8):
-    input[i] = lines[i+2][16:48].split()
+    input[i] = float(lines[i+2][16:48].split())
 input[input==0]='nan'
 input[input==1]='nan'
 
