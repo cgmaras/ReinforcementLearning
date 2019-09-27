@@ -1,5 +1,5 @@
 
-InputGen.inp readed the base.inp file and creates a local directory called Queue which it fills with input files 
+InputGen.inp reads the base.inp file and creates a local directory called Queue which it fills with input files 
 
 
 
