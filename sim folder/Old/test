@@ -1,0 +1,8 @@
+with open('New_Input', 'w') as f1:
+	with open('workymcworker.inp', 'r+') as f: 
+		contents = f.readlines()
+		for x in contents:
+			print(x)
+		f1.writelines(contents)
+	
+	

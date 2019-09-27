@@ -1,0 +1,30 @@
+Wed Sep 25 12:57:21 EDT 2019
+starting job...
+Base_Files
+error.dat
+info.dat
+Old
+Outputs
+Queue
+Runs
+simulate.sh
+new_core1
+Input  File : /home/cgmaras/Python/Queue/new_core1.inp
+Output File : new_core1.out
+Using executable --> /cm/shared/apps/ncsu/CasmoSimulate/libexec/studsvik/simulate3/simulate3-u1.00.02/simulate3.exe
+Wed Sep 25 12:57:27 EDT 2019
+new_core2
+Input  File : /home/cgmaras/Python/Queue/new_core2.inp
+Output File : new_core2.out
+Using executable --> /cm/shared/apps/ncsu/CasmoSimulate/libexec/studsvik/simulate3/simulate3-u1.00.02/simulate3.exe
+Wed Sep 25 12:57:37 EDT 2019
+new_core3
+Input  File : /home/cgmaras/Python/Queue/new_core3.inp
+Output File : new_core3.out
+Using executable --> /cm/shared/apps/ncsu/CasmoSimulate/libexec/studsvik/simulate3/simulate3-u1.00.02/simulate3.exe
+Wed Sep 25 12:57:47 EDT 2019
+new_core4
+Input  File : /home/cgmaras/Python/Queue/new_core4.inp
+Output File : new_core4.out
+Using executable --> /cm/shared/apps/ncsu/CasmoSimulate/libexec/studsvik/simulate3/simulate3-u1.00.02/simulate3.exe
+Wed Sep 25 12:57:58 EDT 2019
