@@ -8,15 +8,19 @@ import random
 # 			print(x)
 # 		f1.writelines(contents)
 
-
+filename2 = 'C:/Users/cgmaras/Desktop/Python/base.inp'
+with open(filename2, 'r') as search:
+    lines = search.readlines()
+    for i in range(len(lines)):
+        lines[i] = lines[i].rstrip()
 
 # reflector and baffle positions
 Reflector = ["1,9","2,9","3,8","3,9","4,8","5,7","5,8","6,6","6,7","7,5","7,6","8,3","8,4","8,5","9,1","9,2","9,3"]
 Baffle = ["4,9","5,9","6,9","7,9","8,9","9,9","9,4","9,5","9,6","9,7","9,8","8,6","8,7","8,8","7,7","7,8","6,8"]
 
 # creating dictionaries for each position in core
-
-x = 5                                               # number of different LPs to be made
+main, row = {}, {}
+x = 10                                               # number of different LPs to be made
 for k in range(x):
     for i in range(1,10):
         for j in range(1,10):
@@ -47,49 +51,67 @@ for k in range(x):
                 else:
                     main[name]['Enrichment'] = 3.2
                     main[name]['BP'] = 16
+            elif main[name]['Flag'] == 1:
+                main[name]['Fuel Type'] = 1
+                main[name]['BU'] = 0
+                main[name]['Enrichment'] = 0
+                main[name]['BP'] = 0
             else:
                 main[name]['Fuel Type'] = 0
                 main[name]['BU'] = 0                # non-fuel filling with zeros
                 main[name]['Enrichment'] = 0
                 main[name]['BP'] = 0
-    print(main)
+        # print(main)
+        row[i] = '\'FUE.TYP\'  '+ str(i) +',   '
+        for j in range(1,10):
+            row[i] += str(main[str(i) + "," + str(j)]['Fuel Type']) + '   '
+        row[i] = row[i][:-3] + '/' + '\n'
 
+    with open('C:/Users/cgmaras/Desktop/Python/Core Queue/new_core_' + str(k) + '.inp', 'w') as f:
+    	for i in range(2):
+    		f.writelines(lines[i] + '\n')
+    	for i in range(1,10):
+    		f.writelines(row[i])
+    	for i in range(11,20):
+    		f.writelines(lines[i] + '\n')
+
+main
 
 ###############################################################################
 # above needs to be pulled and used to write like below
 ###############################################################################
 
 # reading SIMULATE base input file
-filename2 = 'C:/Users/cgmaras/Desktop/Python/base.inp'
-with open(filename2, 'r') as search:
-    lines = search.readlines()
-    for i in range(len(lines)):
-        lines[i] = lines[i].rstrip()
-
-# creating core LP map
-loading = {'core1':2, 'core2':6,'core3':3,'core4':4}
-print(list(loading.keys()))
-for core in list(loading.keys()):
-	input = np.zeros((9,9))
-	for i in range(9):
-	    input[i] = lines[i+2][16:49].split()
-
-	for i in range(2,8):
-		input[input==i]=loading[core]
-
-# converting input array to strings for building new input file
-	input_string = {}
-	for i in range(9):
-		input_string[i] = ''
-		for j in range(9):
-			input_string[i] += (str(int(input[i,j])) + '   ')
-		input_string[i] = input_string[i][:-3]
-
-# writing new SIMULATE input files
-	with open('C:/Users/cgmaras/Desktop/Python/Core Queue/new_' + core + '.inp', 'w') as f:
-		for i in range(2):
-			f.writelines(lines[i] + '\n')
-		for i in range(9):
-			f.writelines('\'FUE.TYP\'  '+ str(i+1) +',   ' + input_string[i] + '/' + '\n')
-		for i in range(11,20):
-			f.writelines(lines[i] + '\n')
+# filename2 = 'C:/Users/cgmaras/Desktop/Python/base.inp'
+# with open(filename2, 'r') as search:
+#     lines = search.readlines()
+#     for i in range(len(lines)):
+#         lines[i] = lines[i].rstrip()
+#
+# # creating core LP map
+# loading = {'core1':2, 'core2':6,'core3':3,'core4':4}
+# print(list(loading.keys()))
+# for core in list(loading.keys()):
+# 	input = np.zeros((9,9))
+# 	for i in range(9):
+# 	    input[i] = lines[i+2][16:49].split()
+#
+# 	for i in range(2,8):
+# 		input[input==i]=loading[core]
+#
+# # converting input array to strings for building new input file
+# 	input_string = {}
+# 	for i in range(9):
+# 		input_string[i] = ''
+# 		for j in range(9):
+# 			input_string[i] += (str(int(input[i,j])) + '   ')
+# 		input_string[i] = input_string[i][:-3]
+#
+# # writing new SIMULATE input files
+# 	with open('C:/Users/cgmaras/Desktop/Python/Core Queue/new_' + core + '.inp', 'w') as f:
+# 		for i in range(2):
+# 			f.writelines(lines[i] + '\n')
+# 		for i in range(9):
+# 			f.writelines('\'FUE.TYP\'  '+ str(i+1) +',   ' + input_string[i] + '/' + '\n')
+# 		for i in range(11,20):
+# 			f.writelines(lines[i] + '\n'
