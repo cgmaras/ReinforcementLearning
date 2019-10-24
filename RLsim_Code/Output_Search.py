@@ -4,23 +4,31 @@ import time
 
 folder = './SimRuns'
 os.makedirs('Outputs')
+filename3 = '/home/cgmaras/Python/RLsim_Code/user_input.py'
+
+with open(filename3) as f:
+    for i in range(21):
+        line = f.readline();
+        out = line.strip('\n')
+
+
 should_restart = True
 while should_restart:
     for file in os.listdir(folder):
         should_restart = False
         if not os.path.isfile(os.path.join(folder,file,'PINPOW')):
             time.sleep(2)
-            os.system('cp '+ os.path.join(folder,file,file+'.out') +  ' /home/cgmaras/Python/RLsim_Code/Outputs')
+            os.system('cp '+ os.path.join(folder,file,file+'.out') + ' ' + out)
         if os.path.isfile(os.path.join(folder,file,'PINPOW')):
             should_restart = True
             break
 
 
 
-filenames = os.listdir("/home/cgmaras/Python/RLsim_Code/Outputs")
+filenames = os.listdir(out)
 
 print(filenames)
-os.chdir('/home/cgmaras/Python/RLsim_Code/Outputs')
+os.chdir(out)
 for filename in filenames:
     #filename = './Outputs/new_core1.out'
     print('\n')

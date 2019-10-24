@@ -16,3 +16,6 @@
 
 # 5.) Base Input File Directory
 /home/cgmaras/Python/RLsim_Code/Base_Files/base.inp
+
+# 6.) Output File Directory
+/home/cgmaras/Python/RLsim_Code/Outputs
