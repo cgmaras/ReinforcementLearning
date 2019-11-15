@@ -1,1 +1,4 @@
-/cm/local/apps/slurm/var/spool/job536580/slurm_script: line 22: -4: substring expression < 0
+mkdir: cannot create directory ‘SimRuns’: File exists
+rm: cannot remove ‘new_core1.out’: No such file or directory
+mkdir: cannot create directory ‘SimRuns’: File exists
+rm: cannot remove ‘new_core2.out’: No such file or directory

@@ -10,7 +10,8 @@ echo $SLURM_SUBMIT_DIR
 #  Make sure we're in right directory
 date
 
-echo "starting job..."
+echo "Starting Main job..."
 
-simulate3 /home/cgmaras/Python/RLsim_Code/SimRuns/new_core2/new_core2.inp   
-echo "Job Finished"
+python3 main.py | tee run.log
+
+echo "Main Job Finished"

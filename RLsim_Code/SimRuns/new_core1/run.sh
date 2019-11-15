@@ -13,4 +13,4 @@ date
 echo "starting job..."
 
 simulate3 /home/cgmaras/Python/RLsim_Code/SimRuns/new_core1/new_core1.inp   
-echo Job Finished
+echo "Job Finished"
