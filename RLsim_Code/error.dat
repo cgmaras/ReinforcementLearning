@@ -1,1 +1,9 @@
-/cm/local/apps/slurm/var/spool/job536580/slurm_script: line 22: -4: substring expression < 0
+rm: cannot remove ‘new_core1.out’: No such file or directory
+mkdir: cannot create directory ‘SimRuns’: File exists
+rm: cannot remove ‘new_core2.out’: No such file or directory
+Traceback (most recent call last):
+  File "main.py", line 34, in <module>
+    output()
+  File "/home/cgmaras/Python/RLsim_Code/Output_Search.py", line 87, in output
+    print(fdh_2d[i])
+UnboundLocalError: local variable 'i' referenced before assignment

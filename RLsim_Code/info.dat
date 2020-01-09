@@ -1,5 +1,21 @@
-Thu Oct 24 09:53:08 EDT 2019
-starting job...
-Old
-RLsim_Code
-test_var.py
+/home/cgmaras/Python/RLsim_Code
+Thu Jan  9 08:58:20 EST 2020
+Starting Main job...
+Submitted batch job 1824224
+Submitted batch job 1824225
+3
+Current working directory is: /home/cgmaras/Python/RLsim_Code
+Started input gen...
+Finished input gen...
+/home/cgmaras/Python/RLsim_Code
+The files contained in Queue are:  ['new_core1.inp', 'new_core2.inp']
+Starting Delay
+Ending Delay
+
+
+new_core1.out
+ EFPD     Boron(ppm)     Fdh           Fq
+ 
+ 
+-------------------------- Fdh ---------------------------
+Main Job Finished
