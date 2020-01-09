@@ -8,11 +8,7 @@ dummy = Input()
 def output():
     folder = './SimRuns'
     os.makedirs('Outputs')
-<<<<<<< HEAD
     filename3 = './user_input.py'
-=======
-    filename3 = '/home/cgmaras/Python/RLsim_Code/user_input.py'
->>>>>>> 648ac38863c9caf1cd70df48210cfdadc9b4cb20
     out = dummy.out
     print('Starting Delay')
     time.sleep(15)
