@@ -1,8 +1,8 @@
 /home/cgmaras/Python/RLsim_Code/SimRuns/new_core1
-Thu Jan  9 08:58:24 EST 2020
+Tue Apr 21 09:57:24 EDT 2020
 starting job...
 Input  File : /home/cgmaras/Python/RLsim_Code/SimRuns/new_core1/new_core1.inp
 Output File : new_core1.out
 Using executable --> /cm/shared/apps/ncsu/CasmoSimulate/libexec/studsvik/simulate3/simulate3-u1.00.02/simulate3.exe
-Thu Jan  9 09:01:24 EST 2020
+Tue Apr 21 09:57:30 EDT 2020
 Job Finished

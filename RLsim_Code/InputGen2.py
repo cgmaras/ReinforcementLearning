@@ -5,6 +5,7 @@ import user_input
 from user_input import Input
 from user_input import Fuel
 from user_input import Types
+from user_input import LoadingPattern
 from user_input import FuelMap
 from user_input import RefMap
 from user_input import BaffleMap
@@ -40,10 +41,10 @@ def inputgen():
     for i in range(length):
         length2 = FuelMap[i]
         for j in range(length2):
-            fuelpos.append(str(i+1) + "," + str(j+1))       
+            fuelpos.append(str(i+1) + "," + str(j+1))
     #print(fuelpos)
 
-    # getting reflector coords    
+    # getting reflector coords
     length = len(FuelMap)
     for i in range(length):
         length2 = FuelMap[i]
@@ -52,8 +53,8 @@ def inputgen():
         for k in range(length3):
             refpos.append(str(i+1) + "," + str(length2+k+1))
     #print(refpos)
-       
-    # getting baffle coords     
+
+    # getting baffle coords
     length = len(FuelMap)
     for i in range(length):
         length2 = FuelMap[i]
@@ -87,27 +88,27 @@ def inputgen():
                     main[name]['Flag'] = 2
 
                 if main[name]['Flag'] == 2:
-                    main[name]['Fuel Type'] = choice(Types)           # fuel type based on 412/512 project description, using random dist for now
+                    main[name]['Fuel Type'] = LoadingPattern[i-1][j-1]       # fuel type based on 412/512 project description, using random dist for now
                     if main[name]['Fuel Type'] == 2:
                         main[name]['Enrichment'] = str(Fuel['2']['Enrichment'])                          # assembly averaged enrichment (u235 w/o)
                         main[name]['BP'] = Fuel['2']['BP']                                  # number of burnable poison rods in assembly
-                        main[name]['BU'] = Fuel['2']['BU'] 
+                        main[name]['BU'] = Fuel['2']['BU']
                     elif main[name]['Fuel Type'] == 3:
                         main[name]['Enrichment'] = str(Fuel['3']['Enrichment'])
                         main[name]['BP'] = Fuel['3']['BP']
-                        main[name]['BU'] = Fuel['3']['BU'] 
+                        main[name]['BU'] = Fuel['3']['BU']
                     elif main[name]['Fuel Type'] == 4:
                         main[name]['Enrichment'] = str(Fuel['4']['Enrichment'])
                         main[name]['BP'] = Fuel['4']['BP']
-                        main[name]['BU'] = Fuel['4']['BU'] 
+                        main[name]['BU'] = Fuel['4']['BU']
                     elif main[name]['Fuel Type'] == 5:
                         main[name]['Enrichment'] = str(Fuel['5']['Enrichment'])
-                        main[name]['BP'] = Fuel['5']['BP'] 
+                        main[name]['BP'] = Fuel['5']['BP']
                         main[name]['BU'] = Fuel['5']['BU']
                     else:
                         main[name]['Enrichment'] = str(Fuel['6']['Enrichment'])
                         main[name]['BP'] = Fuel['6']['BP']
-                        main[name]['BU'] = Fuel['6']['BU'] 
+                        main[name]['BU'] = Fuel['6']['BU']
                 elif main[name]['Flag'] == 1:
                     main[name]['Fuel Type'] = 1
                     main[name]['BU'] = 0
@@ -118,7 +119,7 @@ def inputgen():
                     main[name]['BU'] = 0                # non-fuel filling with zeros
                     main[name]['Enrichment'] = 0
                     main[name]['BP'] = 0
-            # print(main)
+                print(main)
             row[i] = '\'FUE.TYP\'  '+ str(i) +',   '
             for j in range(1,10):
                 row[i] += str(main[str(i) + "," + str(j)]['Fuel Type']) + '   '
@@ -132,11 +133,11 @@ def inputgen():
             for i in range(11,20):
                 f.writelines(lines[i] + '\n')
 
-        
+
 
 
     print("Finished input gen...")
-        
+
 
 
 

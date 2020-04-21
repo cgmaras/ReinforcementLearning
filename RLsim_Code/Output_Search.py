@@ -3,6 +3,12 @@ import numpy as np
 import time
 import user_input
 from user_input import Input
+import datetime
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+import math
 dummy = Input()
 
 def output():
@@ -11,7 +17,7 @@ def output():
     filename3 = './user_input.py'
     out = dummy.out
     print('Starting Delay')
-    time.sleep(15)
+    time.sleep(5)
     print('Ending Delay')
     should_restart = True
     while should_restart:
@@ -50,8 +56,6 @@ def output():
                     Fdh[EFPD] = float(lines[i+12][93:98])
                     boron[EFPD] = float(lines[i+14][36:43])
 
-
-
         index1 = 0
         index2 = 0
         for i in range(len(lines)):
@@ -69,7 +73,6 @@ def output():
                 index2 += 1
 
 
-
         print(' EFPD     Boron(ppm)     Fdh           Fq')
         for i in sorted(list(Fdh.keys())):
             print(('%5s' + '     '  + '%6s' + '        ' + '%6s' + '        ' + '%6s') % (i, boron[i], Fdh[i], Fq[i]))
@@ -85,3 +88,145 @@ def output():
                 break
 
         print(fdh_2d[i])
+        print(' ')
+        print(' ')
+    ################################# Second test ###############################
+        statepoints = 0
+        f =  open(filename,'r')
+        line = f.readline()
+
+        while line:
+        	line = f.readline()
+        	if 'Output Summary' in line:
+        		statepoints += 1
+
+        f.close()
+
+        exp_avg = np.zeros(statepoints)   # GWd/MTU
+        exp_cor = np.zeros(statepoints) # EFPD, GWd/MTU
+        fdh     = np.zeros(statepoints)   #
+        fq 		= np.zeros(statepoints)
+        nodal 	= np.zeros(statepoints)
+        boron	= np.zeros(statepoints)   # ppm
+
+        # Parsing script for different variables
+        f =  open(filename,'r')
+        line = f.readline()
+
+        n = -1
+        while line:
+        	line = f.readline()
+        	if 'Output Summary' in line:
+        		n = n + 1
+
+        		f.readline()						  # 1
+        		exp_avg[n] = f.readline().split()[18] # 2
+        		exp_cor[n] = f.readline().split()[13]
+
+        		for i in range(6):
+        			f.readline()
+        		nodal[n]      = f.readline().split()[13]
+        		f.readline()
+        		fdh[n]     = f.readline().split()[9]
+        		f.readline()
+        		boron[n]   = f.readline().split()[12]
+        f.close()
+
+        f =  open(filename,'r')
+        line = f.readline()
+
+        n = -1
+        while line:
+        	line = f.readline()
+        	if 'Output Summary' in line:
+        		n = n + 1
+
+        		f.readline()						  # 1
+        		exp_avg[n] = f.readline().split()[18] # 2
+        		exp_cor[n] = f.readline().split()[13]
+
+        		for i in range(6):
+        			f.readline()
+        		nodal[n]      = f.readline().split()[13]
+        		f.readline()
+        		fdh[n]     = f.readline().split()[9]
+        		f.readline()
+        		fq[n]   = f.readline().split()[15]
+
+
+        print(exp_avg)
+        print(exp_cor)
+        print(nodal)
+        print(fq)
+        print(fdh)
+        print(boron)
+        print
+        print
+        fq_max = np.amax(fq)
+        fdh_max = np.amax(fdh)
+        boron_max = np.amax(boron)
+        print(fq_max)
+        print(fdh_max)
+        print(boron_max)
+        f.close()
+
+        pdf_title = filename + '.pdf'
+        n = 6
+        with PdfPages(pdf_title) as pdf:
+        	plt.rc('text',usetex=True)
+        	plt.figure(figsize = (n,n))
+        	plt.plot(exp_cor,fq,'r-o')
+        	plt.title('Power Peaking over Cycle Length \n Max Value = %f' %np.amax(fq))
+        	plt.xlabel('Exposure [EFPD]')
+        	plt.ylabel('Power Peaking')
+        	pdf.savefig()
+        	plt.close
+
+        	plt.rc('text',usetex=True)
+        	plt.figure(figsize = (n,n))
+        	plt.plot(exp_cor,fdh,'r-o')
+        	plt.title('Radial Peaking over Cycle Length \n Max Value = %f' %np.amax(fdh))
+        	plt.xlabel('Exposure [EFPD]')
+        	plt.ylabel('F-delta-H')
+        	pdf.savefig()
+        	plt.close
+
+        	plt.rc('text',usetex=True)
+        	plt.figure(figsize = (n,n))
+        	plt.plot(exp_cor,boron,'r-o')
+        	plt.title('Critical Boron over Cycle Length \n Max Value = %f' %np.amax(boron))
+        	plt.xlabel('Exposure [EFPD]')
+        	plt.ylabel('Boron Concentration [ppm]')
+        	pdf.savefig()
+        	plt.close
+
+        	plt.rc('text',usetex=True)
+        	plt.figure(figsize = (n,n))
+        	plt.plot(exp_cor,exp_avg,'r-o')
+        	plt.title('Average Burnup over Cycle Length \n Max Value = %f' %np.amax(exp_cor))
+        	plt.xlabel('Exposure [EFPD]')
+        	plt.ylabel('Core Average Burnup [GWd/MTU]')
+        	pdf.savefig()
+        	plt.close
+
+        	#set file metadata
+        	d = pdf.infodict()
+        	d['Title'] = 'SIMULATE Output Summary'
+        	d['Author'] = 'Cameron Maras'
+        	d['Subject'] = 'Reinforcement Learning in LP Optimization'
+        	d['CreationDate'] = datetime.datetime(2020,1,30)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+output()
